@@ -187,7 +187,12 @@ defmodule Mustache.Compiler do
     quote do
       var = unquote(var)
 
-      if is_function(var, 0), do: var = var.()
+      var =
+        if is_function(var, 0) do
+         var.()
+        else
+          var
+        end
 
       unquote(buffer) <> Mustache.Utils.escape_html(Mustache.Utils.to_binary(var))
     end
@@ -197,7 +202,12 @@ defmodule Mustache.Compiler do
     quote do
       var = unquote(var)
 
-      if is_function(var, 0), do: var = var.()
+      var =
+        if is_function(var, 0) do
+         var.()
+        else
+          var
+        end
 
       unquote(buffer) <> Mustache.Utils.to_binary(var)
     end
@@ -207,7 +217,12 @@ defmodule Mustache.Compiler do
     quote do
       var = adding = Mustache.Utils.recur_access(unquote(var), unquote(atoms))
 
-      if is_function(var, 0), do: var = var.()
+      var =
+        if is_function(var, 0) do
+         var.()
+        else
+          var
+        end
 
       unquote(buffer) <> Mustache.Utils.escape_html(Mustache.Utils.to_binary(var))
     end
@@ -217,7 +232,12 @@ defmodule Mustache.Compiler do
     quote do
       var = Mustache.Utils.recur_access(unquote(var), unquote(atoms))
 
-      if is_function(var, 0), do: var = var.()
+      var =
+        if is_function(var, 0) do
+         var.()
+        else
+          var
+        end
 
       unquote(buffer) <> Mustache.Utils.to_binary(var)
     end
